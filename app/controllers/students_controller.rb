@@ -1,11 +1,18 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: :show
-  
+  before_action :set_student, only: [:show, :activate]
+
   def index
     @students = Student.all
   end
 
   def show
+  end
+
+  def activate
+    set_student
+    @student.toggle!(:active)
+    redirect_to student_path
+  # be able to toggle their active attribute in /students/:id/activate
   end
 
   private
